@@ -7,8 +7,8 @@ train_dataloader:
   type: DataLoader
   dataset:
     type: CocoDetection
-    img_folder: /content/WIDER_train/
-    ann_file: /content/annotations/wider_face_train_annot_coco_style.json
+    img_folder: /kaggle/input/wider-coco-format/WIDER_train
+    ann_file: /kaggle/input/wider-coco-format/annotations/wider_face_train_annot_coco_style.json
     transforms:
       type: Compose
       ops: ~
@@ -21,8 +21,8 @@ val_dataloader:
   type: DataLoader
   dataset:
     type: CocoDetection
-    img_folder: /content/WIDER_val
-    ann_file: /content/annotations/wider_face_val_annot_coco_style.json
+    img_folder: /kaggle/input/wider-coco-format/WIDER_val
+    ann_file: /kaggle/input/wider-coco-format/annotations/wider_face_val_annot_coco_style.json
     transforms:
       type: Compose
       ops: ~
