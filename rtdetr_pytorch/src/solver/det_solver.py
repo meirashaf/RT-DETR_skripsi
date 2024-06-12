@@ -38,6 +38,7 @@ class DetSolver(BaseSolver):
             train_stats = train_one_epoch(
                 self.model, self.criterion, self.train_dataloader, self.optimizer, self.device, epoch,
                 args.clip_max_norm, print_freq=args.log_step, ema=self.ema, scaler=self.scaler)
+            torch.cuda.empty_cache()
 
             self.lr_scheduler.step()
 
