@@ -38,7 +38,7 @@ class ModelEMA(object):
         self.module = deepcopy(dist.de_parallel(model)).eval()  # FP32 EMA
         
         if next(model.parameters()).device.type != 'cpu':
-            self.module.double()  # FP16 EMA
+            self.module.double()  # FP64 EMA
         
         self.decay = decay 
         self.warmups = warmups
