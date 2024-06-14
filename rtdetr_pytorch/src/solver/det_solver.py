@@ -38,11 +38,6 @@ class DetSolver(BaseSolver):
             train_stats = train_one_epoch(
                 self.model, self.criterion, self.train_dataloader, self.optimizer, self.device, epoch,
                 args.clip_max_norm, print_freq=args.log_step, ema=self.ema, scaler=self.scaler)
-
-            del metric_logger
-            gc.collect()
-            torch.cuda.empty_cache()
-
             
             self.lr_scheduler.step()
 
@@ -90,8 +85,10 @@ class DetSolver(BaseSolver):
                         for name in filenames:
                             torch.save(coco_evaluator.coco_eval["bbox"].eval,
                                        self.output_dir / "eval" / name)
-            # torch.cuda.empty_cache()
-
+            del metric_logger
+            gc.collect()
+            torch.cuda.empty_cache()
+    
         total_time = time.time() - start_time
         total_time_str = str(datetime.timedelta(seconds=int(total_time)))
         print('Training time {}'.format(total_time_str))
