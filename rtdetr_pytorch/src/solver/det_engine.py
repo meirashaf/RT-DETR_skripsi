@@ -83,6 +83,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
         # del loss_dict, loss_value, loss_dict_reduced
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
 
+    del metric_logger
+                      
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
