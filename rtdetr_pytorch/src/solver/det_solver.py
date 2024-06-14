@@ -86,9 +86,9 @@ class DetSolver(BaseSolver):
                             torch.save(coco_evaluator.coco_eval["bbox"].eval,
                                        self.output_dir / "eval" / name)
             # if self.output_dir and dist.is_main_process():
-            # del metric_logger
-            gc.collect()
-            torch.cuda.empty_cache()
+            # # del metric_logger
+            # gc.collect()
+            # torch.cuda.empty_cache()
 
 
         total_time = time.time() - start_time
