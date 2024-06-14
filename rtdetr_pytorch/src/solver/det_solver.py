@@ -39,8 +39,8 @@ class DetSolver(BaseSolver):
                 self.model, self.criterion, self.train_dataloader, self.optimizer, self.device, epoch,
                 args.clip_max_norm, print_freq=args.log_step, ema=self.ema, scaler=self.scaler)
 
-            gc.collect()
-            torch.cuda.empty_cache()
+            # gc.collect()
+            # torch.cuda.empty_cache()
             
             self.lr_scheduler.step()
 
