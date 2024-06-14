@@ -41,7 +41,7 @@ class DetSolver(BaseSolver):
             
             self.lr_scheduler.step()
             
-            del metric_logger
+            # del metric_logger
             gc.collect()
             torch.cuda.empty_cache()
 
