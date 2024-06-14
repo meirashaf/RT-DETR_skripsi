@@ -41,10 +41,6 @@ class DetSolver(BaseSolver):
             
             self.lr_scheduler.step()
             
-            # del metric_logger
-            gc.collect()
-            torch.cuda.empty_cache()
-
             if self.output_dir:
                 checkpoint_paths = [self.output_dir / 'checkpoint.pth']
                 # extra checkpoint before LR drop and every 100 epochs
@@ -89,6 +85,11 @@ class DetSolver(BaseSolver):
                         for name in filenames:
                             torch.save(coco_evaluator.coco_eval["bbox"].eval,
                                        self.output_dir / "eval" / name)
+            # if self.output_dir and dist.is_main_process():
+            # del metric_logger
+            gc.collect()
+            torch.cuda.empty_cache()
+
 
         total_time = time.time() - start_time
         total_time_str = str(datetime.timedelta(seconds=int(total_time)))
