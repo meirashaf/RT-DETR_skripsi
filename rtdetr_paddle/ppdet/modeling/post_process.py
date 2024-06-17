@@ -22,13 +22,14 @@ __all__ = [
     'DETRPostProcess',
 ]
 
+
 @register
 class DETRPostProcess(object):
     __shared__ = ['num_classes', 'use_focal_loss', 'with_mask']
     __inject__ = []
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  num_top_queries=100,
                  dual_queries=False,
                  dual_groups=0,
@@ -80,7 +81,7 @@ class DETRPostProcess(object):
         if self.dual_queries:
             num_queries = logits.shape[1]
             logits, bboxes = logits[:, :int(num_queries // (self.dual_groups + 1)), :], \
-                             bboxes[:, :int(num_queries // (self.dual_groups + 1)), :]
+                bboxes[:, :int(num_queries // (self.dual_groups + 1)), :]
 
         bbox_pred = bbox_cxcywh_to_xyxy(bboxes)
         # calculate the original shape of the image
@@ -152,7 +153,6 @@ class DETRPostProcess(object):
         return bbox_pred, bbox_num, mask_pred
 
 
-
 def paste_mask(masks, boxes, im_h, im_w, assign_on_cpu=False):
     """
     Paste the mask prediction to the original image.
@@ -183,7 +183,8 @@ def multiclass_nms(bboxs, num_classes, match_threshold=0.6, match_metric='iou'):
     final_boxes = []
     for c in range(num_classes):
         idxs = bboxs[:, 0] == c
-        if np.count_nonzero(idxs) == 0: continue
+        if np.count_nonzero(idxs) == 0:
+            continue
         r = nms(bboxs[idxs, 1:], match_threshold, match_metric)
         final_boxes.append(np.concatenate([np.full((r.shape[0], 1), c), r], 1))
     return final_boxes

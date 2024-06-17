@@ -163,7 +163,8 @@ class TransformerDecoderLayer(nn.Layer):
 
         # cross attention
         tgt2 = self.cross_attn(
-            self.with_pos_embed(tgt, query_pos_embed), reference_points, memory,
+            self.with_pos_embed(
+                tgt, query_pos_embed), reference_points, memory,
             memory_spatial_shapes, memory_level_start_index, memory_mask)
         tgt = tgt + self.dropout2(tgt2)
         tgt = self.norm2(tgt)
@@ -235,7 +236,7 @@ class RTDETRTransformer(nn.Layer):
     __shared__ = ['num_classes', 'hidden_dim', 'eval_size']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  hidden_dim=256,
                  num_queries=300,
                  position_embed_type='sine',
@@ -417,18 +418,18 @@ class RTDETRTransformer(nn.Layer):
         if self.training:
             denoising_class, denoising_bbox_unact, attn_mask, dn_meta = \
                 get_contrastive_denoising_training_group(gt_meta,
-                                            self.num_classes,
-                                            self.num_queries,
-                                            self.denoising_class_embed.weight,
-                                            self.num_denoising,
-                                            self.label_noise_ratio,
-                                            self.box_noise_scale)
+                                                         self.num_classes,
+                                                         self.num_queries,
+                                                         self.denoising_class_embed.weight,
+                                                         self.num_denoising,
+                                                         self.label_noise_ratio,
+                                                         self.box_noise_scale)
         else:
             denoising_class, denoising_bbox_unact, attn_mask, dn_meta = None, None, None, None
 
         target, init_ref_points_unact, enc_topk_bboxes, enc_topk_logits = \
             self._get_decoder_input(
-            memory, spatial_shapes, denoising_class, denoising_bbox_unact)
+                memory, spatial_shapes, denoising_class, denoising_bbox_unact)
 
         # decoder
         out_bboxes, out_logits = self.decoder(

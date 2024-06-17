@@ -1,14 +1,14 @@
 """by lyuwenyu
 """
 
-import os 
-import sys 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-import argparse
-
-import src.misc.dist as dist 
-from src.core import YAMLConfig 
+from src.core import YAMLConfig
+import src.misc.dist as dist
 from src.solver import TASKS
+import argparse
+import os
+import sys
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), '..'))
 
 
 def main(args, ) -> None:
@@ -21,15 +21,16 @@ def main(args, ) -> None:
 
     cfg = YAMLConfig(
         args.config,
-        resume=args.resume, 
+        resume=args.resume,
         use_amp=args.amp,
         tuning=args.tuning
     )
 
     solver = TASKS[cfg.yaml_cfg['task']](cfg)
-    
+
     if args.test_only:
         solver.val()
+        # pass
     else:
         solver.fit()
 

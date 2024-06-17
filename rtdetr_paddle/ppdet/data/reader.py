@@ -41,7 +41,7 @@ MAIN_PID = os.getpid()
 
 
 class Compose(object):
-    def __init__(self, transforms, num_classes=80):
+    def __init__(self, transforms, num_classes=1):
         self.transforms = transforms
         self.transforms_cls = []
         for t in self.transforms:
@@ -68,7 +68,7 @@ class Compose(object):
 
 
 class BatchCompose(Compose):
-    def __init__(self, transforms, num_classes=80, collate_batch=True):
+    def __init__(self, transforms, num_classes=1, collate_batch=True):
         super(BatchCompose, self).__init__(transforms, num_classes)
         self.collate_batch = collate_batch
 
@@ -141,7 +141,7 @@ class BaseDataLoader(object):
                  batch_size=1,
                  shuffle=False,
                  drop_last=False,
-                 num_classes=80,
+                 num_classes=1,
                  collate_batch=True,
                  use_shared_memory=False,
                  **kwargs):
@@ -149,7 +149,7 @@ class BaseDataLoader(object):
         self._sample_transforms = Compose(
             sample_transforms, num_classes=num_classes)
 
-        # batch transfrom 
+        # batch transfrom
         self._batch_transforms = BatchCompose(batch_transforms, num_classes,
                                               collate_batch)
         self.batch_size = batch_size
@@ -183,7 +183,7 @@ class BaseDataLoader(object):
         # DataLoader do not start sub-process in Windows and Mac
         # system, do not need to use shared memory
         use_shared_memory = self.use_shared_memory and \
-                            sys.platform not in ['win32', 'darwin']
+            sys.platform not in ['win32', 'darwin']
         # check whether shared memory size is bigger than 1G(1024M)
         if use_shared_memory:
             shm_size = _get_shared_memory_size_in_M()
@@ -231,7 +231,7 @@ class TrainReader(BaseDataLoader):
                  batch_size=1,
                  shuffle=True,
                  drop_last=True,
-                 num_classes=80,
+                 num_classes=1,
                  collate_batch=True,
                  **kwargs):
         super(TrainReader, self).__init__(sample_transforms, batch_transforms,
@@ -249,7 +249,7 @@ class EvalReader(BaseDataLoader):
                  batch_size=1,
                  shuffle=False,
                  drop_last=False,
-                 num_classes=80,
+                 num_classes=1,
                  **kwargs):
         super(EvalReader, self).__init__(sample_transforms, batch_transforms,
                                          batch_size, shuffle, drop_last,
@@ -266,9 +266,8 @@ class TestReader(BaseDataLoader):
                  batch_size=1,
                  shuffle=False,
                  drop_last=False,
-                 num_classes=80,
+                 num_classes=1,
                  **kwargs):
         super(TestReader, self).__init__(sample_transforms, batch_transforms,
                                          batch_size, shuffle, drop_last,
                                          num_classes, **kwargs)
-

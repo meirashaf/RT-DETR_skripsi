@@ -371,7 +371,8 @@ class DropBlock(nn.Layer):
 class AnchorGeneratorSSD(object):
     def __init__(self,
                  steps=[8, 16, 32, 64, 100, 300],
-                 aspect_ratios=[[2.], [2., 3.], [2., 3.], [2., 3.], [2.], [2.]],
+                 aspect_ratios=[[2.], [2., 3.], [
+                     2., 3.], [2., 3.], [2.], [2.]],
                  min_ratio=15,
                  max_ratio=90,
                  base_size=300,
@@ -444,7 +445,7 @@ class RCNNBox(object):
                  prior_box_var=[10., 10., 5., 5.],
                  code_type="decode_center_size",
                  box_normalized=False,
-                 num_classes=80,
+                 num_classes=1,
                  export_onnx=False):
         super(RCNNBox, self).__init__()
         self.prior_box_var = prior_box_var
@@ -469,7 +470,8 @@ class RCNNBox(object):
             if isinstance(roi, list):
                 batch_size = len(roi)
             else:
-                batch_size = paddle.slice(paddle.shape(im_shape), [0], [0], [1])
+                batch_size = paddle.slice(
+                    paddle.shape(im_shape), [0], [0], [1])
 
             # bbox_pred.shape: [N, C*4]
             for idx in range(batch_size):
@@ -608,7 +610,7 @@ class YOLOBox(object):
     __shared__ = ['num_classes']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  conf_thresh=0.005,
                  downsample_ratio=32,
                  clip_bbox=True,
@@ -833,8 +835,8 @@ class JDEBox(object):
         return anchor_mesh
 
     def decode_delta(self, delta, fg_anchor_list):
-        px, py, pw, ph = fg_anchor_list[:, 0], fg_anchor_list[:,1], \
-                        fg_anchor_list[:, 2], fg_anchor_list[:,3]
+        px, py, pw, ph = fg_anchor_list[:, 0], fg_anchor_list[:, 1], \
+            fg_anchor_list[:, 2], fg_anchor_list[:, 3]
         dx, dy, dw, dh = delta[:, 0], delta[:, 1], delta[:, 2], delta[:, 3]
         gx = pw * dx + px
         gy = ph * dy + py
@@ -957,7 +959,8 @@ class MaskMatrixNMS(object):
 
         seg_masks = paddle.flatten(seg_masks, start_axis=1, stop_axis=-1)
         # inter.
-        inter_matrix = paddle.mm(seg_masks, paddle.transpose(seg_masks, [1, 0]))
+        inter_matrix = paddle.mm(
+            seg_masks, paddle.transpose(seg_masks, [1, 0]))
         n_samples = paddle.shape(cate_labels)
         # union.
         sum_masks_x = paddle.expand(sum_masks, shape=[n_samples, n_samples])
@@ -966,7 +969,8 @@ class MaskMatrixNMS(object):
             sum_masks_x + paddle.transpose(sum_masks_x, [1, 0]) - inter_matrix))
         iou_matrix = paddle.triu(iou_matrix, diagonal=1)
         # label_specific matrix.
-        cate_labels_x = paddle.expand(cate_labels, shape=[n_samples, n_samples])
+        cate_labels_x = paddle.expand(
+            cate_labels, shape=[n_samples, n_samples])
         label_matrix = paddle.cast(
             (cate_labels_x == paddle.transpose(cate_labels_x, [1, 0])),
             'float32')
@@ -1190,7 +1194,8 @@ class MultiHeadAttention(nn.Layer):
         self.need_weights = need_weights
 
         self.head_dim = embed_dim // num_heads
-        assert self.head_dim * num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
+        assert self.head_dim * \
+            num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
 
         if self._qkv_same_embed_dim:
             self.in_proj_weight = self.create_parameter(
@@ -1334,7 +1339,8 @@ class ConvMixer(nn.Layer):
             dim,
             depth,
             kernel_size, ):
-        Seq, ActBn = nn.Sequential, lambda x: Seq(x, nn.GELU(), nn.BatchNorm2D(dim))
+        Seq, ActBn = nn.Sequential, lambda x: Seq(
+            x, nn.GELU(), nn.BatchNorm2D(dim))
         Residual = type('Residual', (Seq, ),
                         {'forward': lambda self, x: self[0](x) + x})
         return Seq(* [

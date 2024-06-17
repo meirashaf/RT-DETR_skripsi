@@ -33,7 +33,7 @@ class DETRLoss(nn.Layer):
     __inject__ = ['matcher']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  matcher='HungarianMatcher',
                  loss_coeff={
                      'class': 1,
@@ -437,7 +437,7 @@ class MaskDINOLoss(DETRLoss):
     __inject__ = ['matcher']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  matcher='HungarianMatcher',
                  loss_coeff={
                      'class': 4,
@@ -564,7 +564,8 @@ class MaskDINOLoss(DETRLoss):
 
         _, topk_ind = paddle.topk(out_mask, self.num_important_points, axis=1)
         batch_ind = paddle.arange(end=num_masks, dtype=topk_ind.dtype)
-        batch_ind = batch_ind.unsqueeze(-1).tile([1, self.num_important_points])
+        batch_ind = batch_ind.unsqueeze(-1).tile(
+            [1, self.num_important_points])
         topk_ind = paddle.stack([batch_ind, topk_ind], axis=-1)
 
         sample_points = paddle.gather_nd(sample_points.squeeze(1), topk_ind)

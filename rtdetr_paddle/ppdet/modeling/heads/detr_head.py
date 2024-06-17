@@ -84,8 +84,8 @@ class MultiHeadAttentionMap(nn.Layer):
     def forward(self, q, k, mask=None):
         q = self.q_proj(q)
         k = self.k_proj(k)
-        bs, num_queries, n, c, h, w = q.shape[0], q.shape[1], self.num_heads,\
-                                      self.hidden_dim // self.num_heads, k.shape[-2], k.shape[-1]
+        bs, num_queries, n, c, h, w = q.shape[0], q.shape[1], self.num_heads, \
+            self.hidden_dim // self.num_heads, k.shape[-2], k.shape[-1]
         qh = q.reshape([bs, num_queries, n, c])
         kh = k.reshape([bs, n, c, h, w])
         # weights = paddle.einsum("bqnc,bnchw->bqnhw", qh * self.normalize_fact, kh)
@@ -188,7 +188,7 @@ class DETRHead(nn.Layer):
     __inject__ = ['loss']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  hidden_dim=256,
                  nhead=8,
                  num_mlp_layers=3,
@@ -295,7 +295,7 @@ class DeformableDETRHead(nn.Layer):
     __inject__ = ['loss']
 
     def __init__(self,
-                 num_classes=80,
+                 num_classes=1,
                  hidden_dim=512,
                  nhead=8,
                  num_mlp_layers=3,

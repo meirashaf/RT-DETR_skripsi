@@ -6,6 +6,7 @@ import json
 import datetime
 
 import torch
+import gc
 
 from src.misc import dist
 from src.data import get_coco_api_from_dataset
@@ -38,9 +39,9 @@ class DetSolver(BaseSolver):
             train_stats = train_one_epoch(
                 self.model, self.criterion, self.train_dataloader, self.optimizer, self.device, epoch,
                 args.clip_max_norm, print_freq=args.log_step, ema=self.ema, scaler=self.scaler)
-            
+
             self.lr_scheduler.step()
-            
+
             if self.output_dir:
                 checkpoint_paths = [self.output_dir / 'checkpoint.pth']
                 # extra checkpoint before LR drop and every 100 epochs
@@ -74,7 +75,7 @@ class DetSolver(BaseSolver):
             if self.output_dir and dist.is_main_process():
                 with (self.output_dir / "log.txt").open("a") as f:
                     f.write(json.dumps(log_stats) + "\n")
-            
+
                 # for evaluation logs
                 if coco_evaluator is not None:
                     (self.output_dir / 'eval').mkdir(exist_ok=True)
@@ -85,11 +86,10 @@ class DetSolver(BaseSolver):
                         for name in filenames:
                             torch.save(coco_evaluator.coco_eval["bbox"].eval,
                                        self.output_dir / "eval" / name)
-            # if self.output_dir and dist.is_main_process():
-            # # del metric_logger
+            # if cuda_empty_cache:
+            # del metric_logger
             # gc.collect()
             # torch.cuda.empty_cache()
-
 
         total_time = time.time() - start_time
         total_time_str = str(datetime.timedelta(seconds=int(total_time)))
