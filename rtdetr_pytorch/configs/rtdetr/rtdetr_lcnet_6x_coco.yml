@@ -1,0 +1,10 @@
+__include__:
+  [
+    "../dataset/coco_detection.yml",
+    "../runtime.yml",
+    "./include/dataloader.yml",
+    "./include/optimizer.yml",
+    "./include/rtdetr_lcnet.yml",
+  ]
+
+output_dir: ./output/rtdetr_lcnet_6x_coco

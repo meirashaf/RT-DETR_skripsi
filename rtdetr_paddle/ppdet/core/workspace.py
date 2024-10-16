@@ -198,6 +198,7 @@ def register(cls):
 
     Returns: cls
     """
+    # kalo class udh regis
     if cls.__name__ in global_config:
         raise ValueError("Module class already registered: {}".format(
             cls.__name__))
@@ -205,6 +206,7 @@ def register(cls):
         cls = make_partial(cls)
     global_config[cls.__name__] = extract_schema(cls)
     return cls
+# return cls
 
 
 def create(cls_or_name, **kwargs):
@@ -221,6 +223,7 @@ def create(cls_or_name, **kwargs):
     name = type(cls_or_name) == str and cls_or_name or cls_or_name.__name__
     if name in global_config:
         if isinstance(global_config[name], SchemaDict):
+            # SchemaDict digantiin __dict__
             pass
         elif hasattr(global_config[name], "__dict__"):
             # support instance return directly
@@ -288,5 +291,6 @@ def create(cls_or_name, **kwargs):
                 raise ValueError("Unsupported injection type:", target_key)
     # prevent modification of global config values of reference types
     # (e.g., list, dict) from within the created module instances
-    #kwargs = copy.deepcopy(kwargs)
+    # kwargs = copy.deepcopy(kwargs)
     return cls(**cls_kwargs)
+# return cls(**cls_kwargs)

@@ -53,6 +53,7 @@ def _make_python_representer(cls):
         argspec = inspect.getfullargspec(cls)
     else:
         argspec = inspect.getfullargspec(cls.__init__)
+#
     argnames = [arg for arg in argspec.args if arg != 'self']
 
     def python_representer(dumper, obj):
@@ -60,8 +61,10 @@ def _make_python_representer(cls):
             data = {name: getattr(obj, name) for name in argnames}
         else:
             data = obj.__dict__
+
         if '_id' in data:
             del data['_id']
+
         return dumper.represent_mapping(u'!{}'.format(cls.__name__), data)
 
     return python_representer
@@ -83,6 +86,7 @@ def serializable(cls):
     return cls
 
 
+# berdasarkan fungsi/class create, SchemaDict bisa diganti __dict__(?)
 yaml.add_representer(SharedConfig,
                      lambda d, o: d.represent_data(o.default_value))
 

@@ -31,7 +31,7 @@ __all__ = ['LCNet']
 
 NET_CONFIG = {
     "blocks2":
-    #k, in_c, out_c, s, use_se
+    # k, in_c, out_c, s, use_se
     [[3, 16, 32, 1, False], ],
     "blocks3": [
         [3, 32, 64, 2, False],
@@ -117,12 +117,12 @@ class DepthwiseSeparable(nn.Layer):
             act=act)
         if use_se:
             self.se = SEModule(num_channels)
-        self.pw_conv = ConvBNLayer(
-            num_channels=num_channels,
-            filter_size=1,
-            num_filters=num_filters,
-            stride=1,
-            act=act)
+            self.pw_conv = ConvBNLayer(
+                num_channels=num_channels,
+                filter_size=1,
+                num_filters=num_filters,
+                stride=1,
+                act=act)
 
     def forward(self, x):
         x = self.dw_conv(x)
