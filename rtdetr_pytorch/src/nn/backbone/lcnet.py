@@ -34,7 +34,8 @@ MODEL_URLS = {
     "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_75_pretrained.pdparams",
     1.0:
     # "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x1_0_pretrained.pdparams",
-    "https://github.com/wangjian123799/L-DETR/blob/main/torchpred/PPLCNet_x1_0_pretrained.pth.tar",
+    # "https://github.com/wangjian123799/L-DETR/blob/main/torchpred/PPLCNet_x1_0_pretrained.pth.tar",
+    "/content/RT-DETR_skripsi/PPLCNet_x1_0_pretrained.pth.tar",
     1.5:
     "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x1_5_pretrained.pdparams",
     2.0:
@@ -221,7 +222,8 @@ class LCNet(nn.Module):
         self.fc = nn.Linear(self. class_expand, class_num)
 
         if pretrained:
-            state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
+            # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
+            state = torch.load(MODEL_URLS[scale])
             self.load_state_dict(state)
             print(f'Load PPLCNet_x{scale} state_dict')
 
