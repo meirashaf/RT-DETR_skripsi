@@ -169,7 +169,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks2"])
         ])
         print("block 2")
-        print(self.blocks2.weight.shape)
+        print(self.blocks2.shape)
 
         self.blocks3 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -181,7 +181,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks3"])
         ])
         print("block 3")
-        print(self.blocks3.weight.shape)
+        print(self.blocks3.shape)
 
         self.blocks4 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -193,7 +193,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks4"])
         ])
         print("block 4")
-        print(self.blocks4.weight.shape)
+        print(self.blocks4.shape)
 
         self.blocks5 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -205,7 +205,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks5"])
         ])
         print("block 5")
-        print(self.blocks5.weight.shape)
+        print(self.blocks5.shape)
 
         self.blocks6 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -217,7 +217,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
         print("block 6")
-        print(self.blocks6.weight.shape)
+        print(self.blocks6.shape)
 
         # self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
