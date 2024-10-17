@@ -156,6 +156,8 @@ class LCNet(nn.Module):
             stride=2,
             filter_size=3
         )
+        print("block 1")
+        print(self.blocks1.weight.shape)
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -166,6 +168,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks2"])
         ])
+        print("block 2")
+        print(self.blocks2.weight.shape)
 
         self.blocks3 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -176,6 +180,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks3"])
         ])
+        print("block 3")
+        print(self.blocks3.weight.shape)
 
         self.blocks4 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -186,6 +192,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks4"])
         ])
+        print("block 4")
+        print(self.blocks4.weight.shape)
 
         self.blocks5 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -196,6 +204,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks5"])
         ])
+        print("block 5")
+        print(self.blocks5.weight.shape)
 
         self.blocks6 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -206,6 +216,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
+        print("block 6")
+        print(self.blocks6.weight.shape)
 
         # self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
@@ -216,6 +228,7 @@ class LCNet(nn.Module):
             stride=1,
             padding=0,
             bias=False)
+        print("last conv")
         print(self.last_conv.weight.shape)
         # self.hardswish = nn.Hardswish()
         # self.dropout = nn.Dropout(p=dropout_prob)
