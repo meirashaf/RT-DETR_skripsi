@@ -217,7 +217,7 @@ class LCNet(nn.Module):
             padding=0,
             bias=False)
         # print(f"Shape: {self.last_conv.shape}")
-        self.hardswish = nn.Hardswish()
+        # self.hardswish = nn.Hardswish()
         # self.dropout = nn.Dropout(p=dropout_prob)
         # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
@@ -244,7 +244,7 @@ class LCNet(nn.Module):
         x = self.blocks6(x)
         # x = self.avg_pool(x)
         x = self.last_conv(x)
-        x = self.hardswish(x)
+        # x = self.hardswish(x)
         # x = self.dropout(x)
         # x = self.flatten(x)
         # x = self.fc(x)
