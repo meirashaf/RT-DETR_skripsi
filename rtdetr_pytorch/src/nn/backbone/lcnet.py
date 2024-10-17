@@ -206,7 +206,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
 
-        # self.avg_pool = nn.AdaptiveAvgPool2d(1)
+        self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
         self.last_conv = nn.Conv2d(
             in_channels=make_divisible(NET_CONFIG["blocks6"][-1][2] * scale),
@@ -241,7 +241,7 @@ class LCNet(nn.Module):
         x = self.blocks4(x)
         x = self.blocks5(x)
         x = self.blocks6(x)
-        # x = self.avg_pool(x)
+        x = self.avg_pool(x)
         x = self.last_conv(x)
         x = self.hardswish(x)
         # x = self.dropout(x)

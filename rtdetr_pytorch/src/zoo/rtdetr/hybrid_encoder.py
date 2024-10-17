@@ -291,7 +291,7 @@ class HybridEncoder(nn.Module):
     def forward(self, feats):
         print("~~~~~~~~~~~~~~~~")
         # print(len(feats), len(self.in_channels))
-        print(feats)
+        # print(feats)
         print("~~~~~~~~~~~~~~~~")
         assert len(feats) == len(self.in_channels)
         proj_feats = [self.input_proj[i](feat) for i, feat in enumerate(feats)]
