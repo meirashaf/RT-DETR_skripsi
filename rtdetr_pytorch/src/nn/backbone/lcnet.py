@@ -36,6 +36,7 @@ MODEL_URLS = {
     # "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x1_0_pretrained.pdparams",
     # "https://github.com/wangjian123799/L-DETR/blob/main/torchpred/PPLCNet_x1_0_pretrained.pth.tar",
     "/content/RT-DETR_skripsi/PPLCNet_x1_0_pretrained.pth.tar",
+    # "C:\SHAFA\Ngoding\SKRIPSI-ngoding\RT-DETR\PPLCNet_x1_0_pretrained.pth.tar",
     1.5:
     "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x1_5_pretrained.pdparams",
     2.0:
