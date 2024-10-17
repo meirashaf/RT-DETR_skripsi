@@ -156,8 +156,8 @@ class LCNet(nn.Module):
             stride=2,
             filter_size=3
         )
-        print("conv 1")
-        print(self.conv1.weight.shape)
+        # print("conv 1")
+        # print(self.conv1.weight.shape)
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
