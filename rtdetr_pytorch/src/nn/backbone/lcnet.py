@@ -152,9 +152,10 @@ class LCNet(nn.Module):
 
         self.conv1 = ConvBNLayer(
             num_channels=3,
-            filter_size=3,
             num_filters=make_divisible(16 * scale),
-            stride=2)
+            stride=2,
+            filter_size=3
+        )
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -206,7 +207,7 @@ class LCNet(nn.Module):
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
 
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
+        # self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
         self.last_conv = nn.Conv2d(
             in_channels=make_divisible(NET_CONFIG["blocks6"][-1][2] * scale),
@@ -217,10 +218,10 @@ class LCNet(nn.Module):
             bias=False)
 
         self.hardswish = nn.Hardswish()
-        self.dropout = nn.Dropout(p=dropout_prob)
-        self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
+        # self.dropout = nn.Dropout(p=dropout_prob)
+        # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
-        # self.fc = nn.Linear(self. class_expand, class_num)
+        self.fc = nn.Linear(self. class_expand, class_num)
 
         if pretrained:
             # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
@@ -241,12 +242,12 @@ class LCNet(nn.Module):
         x = self.blocks4(x)
         x = self.blocks5(x)
         x = self.blocks6(x)
-        x = self.avg_pool(x)
+        # x = self.avg_pool(x)
         x = self.last_conv(x)
         x = self.hardswish(x)
         # x = self.dropout(x)
         # x = self.flatten(x)
-        # x = self.fc(x)
+        x = self.fc(x)
         return x
 
 
