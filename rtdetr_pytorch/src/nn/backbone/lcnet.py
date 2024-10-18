@@ -272,7 +272,7 @@ class LCNet(nn.Module):
         # print("flat", x.shape)
         # x = self.fc(x)
         # print("fc", x.shape)
-        # x = x.unsqueeze(-1)
+        x = x.unsqueeze(-1)
         return x
 
 
