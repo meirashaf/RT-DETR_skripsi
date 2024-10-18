@@ -19,7 +19,7 @@ LCNet:
 
 HybridEncoder:
   in_channels: [1280, 640, 320, 256] #compare with pretrained lcnet
-  feat_strides: [8, 12, 16]
+  feat_strides: [2, 4, 8]
 
   # intra
   hidden_dim: 256
