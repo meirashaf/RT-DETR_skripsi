@@ -249,20 +249,27 @@ class LCNet(nn.Module):
     def forward(self, x):
 
         x = self.conv1(x)
+        print("1", x.shape)
         x = self.blocks2(x)
 
+        print("2", x.shape)
         x = self.blocks3(x)
+        print("3", x.shape)
         x = self.blocks4(x)
+        print("4", x.shape)
         x = self.blocks5(x)
+        print("5", x.shape)
         x = self.blocks6(x)
         # x = self.avg_pool(x)
+        print("6", x.shape)
         x = self.last_conv(x)
+        print("last", x.shape)
         x = self.hardswish(x)
         # x = self.dropout(x)
         # x = self.flatten(x)
         # x = self.fc(x)
         # x = x.unsqueeze(-1)
-        print(x.shape)
+        print("hard", x.shape)
         return x
 
 
