@@ -8,6 +8,7 @@ import torch.nn as nn
 # from .checkpoint import load_dygraph_pretrain
 
 from src.core import register
+import sys
 
 __all__ = ['LCNet']
 
@@ -156,8 +157,6 @@ class LCNet(nn.Module):
             stride=2,
             filter_size=3
         )
-        # print("conv 1")
-        # print(self.conv1.weight.shape)
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -168,8 +167,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks2"])
         ])
-        print("block 2")
-        print(self.blocks2)
+        # print("block 2")
+        # print(self.blocks2)
 
         self.blocks3 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -180,8 +179,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks3"])
         ])
-        print("block 3")
-        print(self.blocks3)
+        # print("block 3")
+        # print(self.blocks3)
 
         self.blocks4 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -192,8 +191,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks4"])
         ])
-        print("block 4")
-        print(self.blocks4)
+        # print("block 4")
+        # print(self.blocks4)
 
         self.blocks5 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -204,8 +203,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks5"])
         ])
-        print("block 5")
-        print(self.blocks5)
+        # print("block 5")
+        # print(self.blocks5)
 
         self.blocks6 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -216,8 +215,8 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
-        print("block 6")
-        print(self.blocks6)
+        # print("block 6")
+        # print(self.blocks6)
 
         # self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
@@ -228,13 +227,12 @@ class LCNet(nn.Module):
             stride=1,
             padding=0,
             bias=False)
-        print("last conv")
-        print(self.last_conv.weight.shape)
-        # self.hardswish = nn.Hardswish()
-        # self.dropout = nn.Dropout(p=dropout_prob)
+
+        self.hardswish = nn.Hardswish()
+        self.dropout = nn.Dropout(p=dropout_prob)
         # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
-        # self.fc = nn.Linear(self. class_expand, class_num)
+        self.fc = nn.Linear(self. class_expand, class_num)
 
         if pretrained:
             # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
@@ -245,6 +243,8 @@ class LCNet(nn.Module):
             # self._load_pretrained(
             #     MODEL_URLS["PPLCNet_x{}".format(scale)], use_ssld=use_ssld
             # )
+
+        sys.exit("~~~~~~~~~~~~~biar g error~~~~~~~~~~~~~~")
 
     def forward(self, x):
 
@@ -257,7 +257,7 @@ class LCNet(nn.Module):
         x = self.blocks6(x)
         # x = self.avg_pool(x)
         x = self.last_conv(x)
-        # x = self.hardswish(x)
+        x = self.hardswish(x)
         # x = self.dropout(x)
         # x = self.flatten(x)
         # x = self.fc(x)
