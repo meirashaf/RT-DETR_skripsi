@@ -18,7 +18,7 @@ LCNet:
 #   dla: dla34
 
 HybridEncoder:
-  in_channels: [1280, 640, 320, 256] #compare with pretrained lcnet
+  in_channels: [640, 320, 256] #compare with pretrained lcnet
   feat_strides: [8, 16, 32]
 
   # intra

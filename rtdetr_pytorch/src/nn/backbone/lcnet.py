@@ -228,11 +228,11 @@ class LCNet(nn.Module):
             padding=0,
             bias=False)
 
-        # self.hardswish = nn.Hardswish()
-        # self.dropout = nn.Dropout(p=dropout_prob)
-        # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
+        self.hardswish = nn.Hardswish()
+        self.dropout = nn.Dropout(p=dropout_prob)
+        self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
-        # self.fc = nn.Linear(self. class_expand, class_num)
+        self.fc = nn.Linear(self. class_expand, class_num)
 
         if pretrained:
             # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
@@ -264,8 +264,8 @@ class LCNet(nn.Module):
         print("6", x.shape)
         x = self.last_conv(x)
         print("last", x.shape)
-        # x = self.hardswish(x)
-        # print("hard", x.shape)
+        x = self.hardswish(x)
+        print("hard", x.shape)
         # x = self.dropout(x)
         # print("dropout", x.shape)
         # x = self.flatten(x)
