@@ -266,7 +266,7 @@ class LCNet(nn.Module):
         print("last", x.shape)
         x = self.hardswish(x)
         print("hard", x.shape)
-        # x = self.dropout(x)
+        x = self.dropout(x)
         # print("dropout", x.shape)
         # x = self.flatten(x)
         # print("flat", x.shape)
