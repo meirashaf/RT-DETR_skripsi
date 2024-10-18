@@ -262,6 +262,7 @@ class LCNet(nn.Module):
         # x = self.flatten(x)
         # x = self.fc(x)
         # x = x.unsqueeze(-1)
+        print(x.shape)
         return x
 
 
