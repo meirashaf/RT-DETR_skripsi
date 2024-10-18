@@ -244,7 +244,7 @@ class LCNet(nn.Module):
             #     MODEL_URLS["PPLCNet_x{}".format(scale)], use_ssld=use_ssld
             # )
 
-        sys.exit("~~~~~~~~~~~~~biar g error~~~~~~~~~~~~~~")
+        # sys.exit("~~~~~~~~~~~~~biar g error~~~~~~~~~~~~~~")
 
     def forward(self, x):
 

@@ -12,7 +12,7 @@ RTDETR:
 
 LCNet:
   scale: 1.0
-  pretrained: false
+  pretrained: true
   return_idx: [1, 2, 3]
 # DLANet:
 #   dla: dla34
