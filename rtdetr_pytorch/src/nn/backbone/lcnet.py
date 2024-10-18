@@ -258,9 +258,9 @@ class LCNet(nn.Module):
         # x = self.avg_pool(x)
         x = self.last_conv(x)
         x = self.hardswish(x)
-        x = self.dropout(x)
-        x = self.flatten(x)
-        x = self.fc(x)
+        # x = self.dropout(x)
+        # x = self.flatten(x)
+        # x = self.fc(x)
         x = x.unsqueeze(-1)
         return x
 
