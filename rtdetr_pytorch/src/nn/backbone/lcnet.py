@@ -230,7 +230,7 @@ class LCNet(nn.Module):
 
         self.hardswish = nn.Hardswish()
         self.dropout = nn.Dropout(p=dropout_prob)
-        self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
+        # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
         # self.fc = nn.Linear(self. class_expand, class_num)
 
