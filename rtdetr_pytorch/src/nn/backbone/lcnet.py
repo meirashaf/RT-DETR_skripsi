@@ -261,7 +261,7 @@ class LCNet(nn.Module):
         # x = self.dropout(x)
         # x = self.flatten(x)
         # x = self.fc(x)
-        x = x.unsqueeze(-1)
+        # x = x.unsqueeze(-1)
         return x
 
 
