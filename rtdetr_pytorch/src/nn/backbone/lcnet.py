@@ -265,11 +265,14 @@ class LCNet(nn.Module):
         x = self.last_conv(x)
         print("last", x.shape)
         x = self.hardswish(x)
-        # x = self.dropout(x)
-        # x = self.flatten(x)
-        # x = self.fc(x)
-        # x = x.unsqueeze(-1)
         print("hard", x.shape)
+        x = self.dropout(x)
+        print("dropout", x.shape)
+        x = self.flatten(x)
+        print("flat", x.shape)
+        x = self.fc(x)
+        print("fc", x.shape)
+        # x = x.unsqueeze(-1)
         return x
 
 
