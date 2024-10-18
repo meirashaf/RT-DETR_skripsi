@@ -232,7 +232,7 @@ class LCNet(nn.Module):
         self.dropout = nn.Dropout(p=dropout_prob)
         # self.flatten = nn.Flatten(start_dim=1, end_dim=-1)
 
-        self.fc = nn.Linear(self. class_expand, class_num)
+        # self.fc = nn.Linear(self. class_expand, class_num)
 
         if pretrained:
             # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
@@ -258,7 +258,7 @@ class LCNet(nn.Module):
         # x = self.avg_pool(x)
         x = self.last_conv(x)
         x = self.hardswish(x)
-        # x = self.dropout(x)
+        x = self.dropout(x)
         # x = self.flatten(x)
         # x = self.fc(x)
         return x
