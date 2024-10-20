@@ -80,8 +80,11 @@ class ConvBNLayer(nn.Module):
 
     def forward(self, x):
         x = self.conv(x)
+        print("conv", x.shape)
         x = self.bn(x)
+        print("bn", x.shape)
         x = self.hardswish(x)
+        print("hardswish", x.shape)
         return x
 
 
@@ -250,6 +253,7 @@ class LCNet(nn.Module):
 
         x = self.conv1(x)
         print("1", x.shape)
+        quit()
         x = self.blocks2(x)
 
         print("2", x.shape)
