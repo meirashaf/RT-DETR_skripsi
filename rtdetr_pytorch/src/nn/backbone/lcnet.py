@@ -275,6 +275,7 @@ class LCNet(nn.Module):
         x = torch.flatten(x, start_dim=0, end_dim=1)
         # x = x.permute(1, 0)
         x = x.unsqueeze(-1).unsqueeze(-1)
+        print("unsqueeze", x.shape)
         # x = x.unsqueeze(-1)
         return x
 
