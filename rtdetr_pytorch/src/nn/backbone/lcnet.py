@@ -263,7 +263,7 @@ class LCNet(nn.Module):
 
         x = self.conv1(x)
         print("1", x.shape)
-        quit()
+        # quit()
         x = self.blocks2(x)
 
         print("2", x.shape)
