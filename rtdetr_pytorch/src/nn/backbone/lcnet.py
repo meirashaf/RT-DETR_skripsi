@@ -67,12 +67,17 @@ class ConvBNLayer(nn.Module):
     def __init__(self, num_channels, filter_size, num_filters, stride, num_groups=1):
         super().__init__()
 
+        print("ubah2", num_channels,
+              num_filters,
+              filter_size,
+              stride,
+              padding=(filter_size - 1) // 2,
+              groups=num_groups)
         self.conv = nn.Conv2d(
             num_channels,
             num_filters,
             filter_size,
             stride,
-            kernel_size=1,
             padding=(filter_size - 1) // 2,
             groups=num_groups,
             bias=False,
@@ -98,14 +103,14 @@ class SEModule(nn.Module):
         self.conv1 = nn.Conv2d(
             in_channels=channel,
             out_channels=channel // reduction,
-            kernel_size=1,
+            kernel_size=3,
             stride=1,
             padding=0)
         self.relu = nn.ReLU()
         self.conv2 = nn.Conv2d(
             in_channels=channel // reduction,
             out_channels=channel,
-            kernel_size=1,
+            kernel_size=3,
             stride=1,
             padding=0)
         self.hardsigmoid = nn.Hardsigmoid()
@@ -130,7 +135,6 @@ class DepthwiseSeparable(nn.Module):
             num_channels=num_channels,
             num_filters=num_channels,
             filter_size=dw_size,
-            # kernel_size=1,
             stride=stride,
             num_groups=num_channels)
 
@@ -139,7 +143,6 @@ class DepthwiseSeparable(nn.Module):
         self.pw_conv = ConvBNLayer(
             num_channels=num_channels,
             filter_size=1,
-            # kernel_size=1,
             num_filters=num_filters,
             stride=1)
 
@@ -160,10 +163,10 @@ class LCNet(nn.Module):
 
         self.conv1 = ConvBNLayer(
             num_channels=3,
+            filter_size=3,
             num_filters=make_divisible(16 * scale),
-            # kernel_size=1,
-            stride=2,
-            filter_size=3)
+            stride=2
+        )
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
