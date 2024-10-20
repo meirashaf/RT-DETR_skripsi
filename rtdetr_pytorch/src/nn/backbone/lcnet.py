@@ -272,7 +272,7 @@ class LCNet(nn.Module):
         # print("flat", x.shape)
         # x = self.fc(x)
         # # print("fc", x.shape)
-        # x = torch.flatten(x, start_dim=0, end_dim=1)
+        x = torch.flatten(x, start_dim=0, end_dim=1)
         # x = x.permute(1, 0)
         # x = x.unsqueeze(-1).unsqueeze(-1)
         x = x.unsqueeze(-1)
