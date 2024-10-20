@@ -167,6 +167,7 @@ class LCNet(nn.Module):
             num_filters=make_divisible(16 * scale),
             stride=2
         )
+        print(self.conv1.shape)
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
