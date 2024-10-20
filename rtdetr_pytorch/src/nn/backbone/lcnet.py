@@ -130,7 +130,7 @@ class DepthwiseSeparable(nn.Module):
             num_channels=num_channels,
             num_filters=num_channels,
             filter_size=dw_size,
-            kernel_size=1,
+            # kernel_size=1,
             stride=stride,
             num_groups=num_channels)
 
@@ -139,7 +139,7 @@ class DepthwiseSeparable(nn.Module):
         self.pw_conv = ConvBNLayer(
             num_channels=num_channels,
             filter_size=1,
-            kernel_size=1,
+            # kernel_size=1,
             num_filters=num_filters,
             stride=1)
 
@@ -161,7 +161,7 @@ class LCNet(nn.Module):
         self.conv1 = ConvBNLayer(
             num_channels=3,
             num_filters=make_divisible(16 * scale),
-            kernel_size=1,
+            # kernel_size=1,
             stride=2,
             filter_size=3)
 
