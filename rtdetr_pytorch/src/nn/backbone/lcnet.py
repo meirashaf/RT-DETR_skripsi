@@ -72,6 +72,7 @@ class ConvBNLayer(nn.Module):
             num_filters,
             filter_size,
             stride,
+            kernel_size=3,
             padding=(filter_size - 1) // 2,
             groups=num_groups,
             bias=False)
