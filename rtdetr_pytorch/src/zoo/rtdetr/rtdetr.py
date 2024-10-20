@@ -29,10 +29,12 @@ class RTDETR(nn.Module):
         if self.multi_scale and self.training:
             sz = np.random.choice(self.multi_scale)
             x = F.interpolate(x, size=[sz, sz])
-        print("multi_scale : ", self.multi_scale)
-        print(np.random.choice(self.multi_scale))
-        print("shape", x.shape)
-        print("random : ", x)
+
+            # print("multi_scale : ", self.multi_scale)
+            # print(np.random.choice(self.multi_scale))
+            # print("shape", x.shape)
+            # print("random : ", x)
+
         x = self.backbone(x)
         x = self.encoder(x)
         x = self.decoder(x, targets)
