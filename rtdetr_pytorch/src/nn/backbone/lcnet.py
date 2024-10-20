@@ -72,7 +72,6 @@ class ConvBNLayer(nn.Module):
             num_filters,
             filter_size,
             stride,
-            kernel_size=3,
             padding=(filter_size - 1) // 2,
             groups=num_groups,
             bias=False)
@@ -159,7 +158,8 @@ class LCNet(nn.Module):
             num_channels=3,
             num_filters=make_divisible(16 * scale),
             stride=2,
-            filter_size=3
+            filter_size=3,
+            kernel_size=3,
         )
 
         self.blocks2 = nn.Sequential(*[
