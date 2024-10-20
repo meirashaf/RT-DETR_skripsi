@@ -71,8 +71,8 @@ class ConvBNLayer(nn.Module):
               num_filters,
               filter_size,
               stride,
-              padding=(filter_size - 1) // 2,
-              groups=num_groups)
+              (filter_size - 1) // 2,
+              num_groups)
         self.conv = nn.Conv2d(
             num_channels,
             num_filters,
