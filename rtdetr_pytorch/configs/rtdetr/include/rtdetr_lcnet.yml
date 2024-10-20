@@ -8,7 +8,7 @@ RTDETR:
   backbone: LCNet
   encoder: HybridEncoder
   decoder: RTDETRTransformer
-  multi_scale: [480]
+  multi_scale: [256]
   # multi_scale: [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800]
 
 LCNet:
