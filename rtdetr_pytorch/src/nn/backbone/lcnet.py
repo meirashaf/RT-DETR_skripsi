@@ -165,7 +165,8 @@ class LCNet(nn.Module):
             num_channels=3,
             filter_size=3,
             num_filters=make_divisible(16 * scale),
-            stride=2
+            stride=1
+            # stride=2
         )
         # ga bisa print shape
         print(self.conv1)
