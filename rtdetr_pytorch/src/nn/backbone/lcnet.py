@@ -286,7 +286,7 @@ class LCNet(nn.Module):
         # print("flat", x.shape)
         # x = self.fc(x)
         # # print("fc", x.shape) 4, 1280, 256 = 0, 1, 2 = 1, 2, 0
-        x = torch.flatten(x, start_dim=2, end_dim=3)
+        #x = torch.flatten(x, start_dim=2, end_dim=3)
         print("flatten", x.shape)
         #x = torch.permute(x, (1, 2, 0))
         print("permute", x.shape)
