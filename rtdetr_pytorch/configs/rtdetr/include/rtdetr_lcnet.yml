@@ -8,18 +8,17 @@ RTDETR:
   backbone: LCNet
   encoder: HybridEncoder
   decoder: RTDETRTransformer
-  # multi_scale: [256]
-  multi_scale: [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800]
+  multi_scale: [256]
+  # multi_scale: [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800]
 
 LCNet:
   scale: 1.0
   pretrained: false
   return_idx: [1, 2, 3]
-# DLANet:
-#   dla: dla34
 
 HybridEncoder:
-  in_channels: [1280, 512, 256, 128] #compare with pretrained lcnet
+  # in_channels: [1280, 512, 256, 128] #compare with pretrained lcnet
+  in_channels: [256, 512, 1024]
   # feat_strides: [1, 2, 3]
   feat_strides: [8, 16, 32]
 
