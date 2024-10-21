@@ -103,14 +103,14 @@ class SEModule(nn.Module):
         self.conv1 = nn.Conv2d(
             in_channels=channel,
             out_channels=channel // reduction,
-            kernel_size=3,
+            kernel_size=1,
             stride=1,
             padding=0)
         self.relu = nn.ReLU()
         self.conv2 = nn.Conv2d(
             in_channels=channel // reduction,
             out_channels=channel,
-            kernel_size=3,
+            kernel_size=1,
             stride=1,
             padding=0)
         self.hardsigmoid = nn.Hardsigmoid()
@@ -165,8 +165,8 @@ class LCNet(nn.Module):
             num_channels=3,
             filter_size=3,
             num_filters=make_divisible(16 * scale),
-            stride=1
-            # stride=2
+            # stride=1
+            stride=2
         )
         # ga bisa print shape
         print(self.conv1)
