@@ -294,7 +294,7 @@ class HybridEncoder(nn.Module):
         # print(feats)
         print("~~~~~~~~~~~~~~~~")
         assert len(feats) == len(self.in_channels)
-        print("sikil", feats.shape)
+        print("sikil", len(feats))
         proj_feats = [self.input_proj[i](feat) for i, feat in enumerate(feats)]
 
         # encoder
