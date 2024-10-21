@@ -288,9 +288,9 @@ class LCNet(nn.Module):
         # # print("fc", x.shape) 4, 1280, 256 = 0, 1, 2 = 1, 2, 0
         x = torch.flatten(x, start_dim=2, end_dim=3)
         print("flatten", x.shape)
-        x = torch.permute(x, (1, 2, 0))
+        #x = torch.permute(x, (1, 2, 0))
         print("permute", x.shape)
-        x = x.unsqueeze(-1)
+        #x = x.unsqueeze(-1)
         print("unsqueeze", x.shape)
         # x = x.unsqueeze(-1)
         return x
