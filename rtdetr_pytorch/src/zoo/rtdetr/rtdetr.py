@@ -36,7 +36,7 @@ class RTDETR(nn.Module):
             # print("random : ", x)
 
         x = self.backbone(x)
-        print("hybrid", x.shape)
+        print("hybrid", len(x))
         x = self.encoder(x)
         x = self.decoder(x, targets)
 
