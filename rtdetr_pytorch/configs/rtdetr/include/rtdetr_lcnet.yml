@@ -17,8 +17,8 @@ LCNet:
   return_idx: [1, 2, 3]
 
 HybridEncoder:
-  # in_channels: [1280, 512, 256, 128] #compare with pretrained lcnet
-  in_channels: [128, 256, 512, 1024]
+  in_channels: [1280, 512, 256, 128] #compare with pretrained lcnet
+  # in_channels: [128, 256, 512, 1024]
   # feat_strides: [1, 2, 3]
   feat_strides: [8, 16, 32]
 
