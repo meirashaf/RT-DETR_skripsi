@@ -290,7 +290,7 @@ class HybridEncoder(nn.Module):
 
     def forward(self, feats):
         print("~~~~~~~~~~~~~~~~")
-        # print(feats.shape, self.in_channels.shape)
+        print(len(feats), len(self.in_channels))
         # print(feats)
         print("~~~~~~~~~~~~~~~~")
         assert len(feats) == len(self.in_channels)
