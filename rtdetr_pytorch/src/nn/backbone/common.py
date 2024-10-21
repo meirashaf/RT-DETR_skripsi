@@ -20,7 +20,7 @@ class ConvNormLayer(nn.Module):
         self.act = nn.Identity() if act is None else get_activation(act) 
 
     def forward(self, x):
-        print(self.conv(x))
+        print("conv 1", self.conv(x))
         return self.act(self.norm(self.conv(x)))
 
 
