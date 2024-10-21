@@ -215,7 +215,7 @@ class PResNet(nn.Module):
 
     def forward(self, x):
         conv1 = self.conv1(x)
-        print(conv1.shape)
+        print("conv1", conv1.shape)
         x = F.max_pool2d(conv1, kernel_size=3, stride=2, padding=1)
         outs = []
         for idx, stage in enumerate(self.res_layers):
@@ -223,5 +223,5 @@ class PResNet(nn.Module):
             if idx in self.return_idx:
                 outs.append(x)
 
-        print(x.shape)
+        print("final", x.shape)
         return outs
