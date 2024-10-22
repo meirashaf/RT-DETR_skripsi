@@ -269,7 +269,7 @@ class LCNet(nn.Module):
 
     def forward(self, x):
 
-        outs = nn.ModuleList()
+        outs = []
 
         x = self.conv1(x)
         print("1", x.shape)
