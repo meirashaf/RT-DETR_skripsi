@@ -156,10 +156,12 @@ class DepthwiseSeparable(nn.Module):
 
 @register
 class LCNet(nn.Module):
-    def __init__(self, scale=1.0, class_num=1000, dropout_prob=0.2, class_expand=1280, pretrained=False):
+    def __init__(self, scale=1.0, feature_maps=[3, 4, 5], class_num=1000, dropout_prob=0.2, class_expand=1280, pretrained=False):
         super().__init__()
         self.scale = scale
         self.class_expand = class_expand
+
+        out_channels = nn.ModuleList()
 
         self.conv1 = ConvBNLayer(
             num_channels=3,
@@ -168,8 +170,6 @@ class LCNet(nn.Module):
             # stride=1
             stride=2
         )
-        # ga bisa print shape
-        print(self.conv1)
 
         self.blocks2 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -192,8 +192,9 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks3"])
         ])
-        # print("block 3")
-        # print(self.blocks3)
+
+        out_channels.append(
+            make_divisible(NET_CONFIG["blocks3"][-1][2] * scale))
 
         self.blocks4 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -204,8 +205,9 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks4"])
         ])
-        # print("block 4")
-        # print(self.blocks4)
+
+        out_channels.append(
+            make_divisible(NET_CONFIG["blocks4"][-1][2] * scale))
 
         self.blocks5 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -216,8 +218,9 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks5"])
         ])
-        # print("block 5")
-        # print(self.blocks5)
+
+        out_channels.append(
+            make_divisible(NET_CONFIG["blocks5"][-1][2] * scale))
 
         self.blocks6 = nn.Sequential(*[
             DepthwiseSeparable(
@@ -228,8 +231,9 @@ class LCNet(nn.Module):
                 use_se=se)
             for i, (k, in_c, out_c, s, se) in enumerate(NET_CONFIG["blocks6"])
         ])
-        # print("block 6")
-        # print(self.blocks6)
+
+        out_channels.append(
+            make_divisible(NET_CONFIG["blocks6"][-1][2] * scale))
 
         # self.avg_pool = nn.AdaptiveAvgPool2d(1)
 
@@ -247,6 +251,10 @@ class LCNet(nn.Module):
 
         self.fc = nn.Linear(self. class_expand, class_num)
 
+        self._out_channels = [
+            ch for idx, ch in enumerate(out_channels) if idx + 2 in feature_maps
+        ]
+
         if pretrained:
             # state = torch.hub.load_state_dict_from_url(MODEL_URLS[scale])
             state = torch.load(MODEL_URLS[scale])
@@ -261,39 +269,58 @@ class LCNet(nn.Module):
 
     def forward(self, x):
 
+        outs = nn.ModuleList()
+
         x = self.conv1(x)
         print("1", x.shape)
-        # quit()
-        x = self.blocks2(x)
 
+        x = self.blocks2(x)
         print("2", x.shape)
+
         x = self.blocks3(x)
         print("3", x.shape)
+        outs.append(x)
+
         x = self.blocks4(x)
         print("4", x.shape)
+        outs.append(x)
+
         x = self.blocks5(x)
         print("5", x.shape)
+        outs.append(x)
+
         x = self.blocks6(x)
-        # x = self.avg_pool(x)
         print("6", x.shape)
+        # x = self.avg_pool(x)
+        outs.append(x)
+
         x = self.last_conv(x)
         print("last", x.shape)
+
         x = self.hardswish(x)
         print("hard", x.shape)
+
         # x = self.dropout(x)
         # print("dropout", x.shape)
         # x = self.flatten(x)
         # print("flat", x.shape)
         # x = self.fc(x)
-        # # print("fc", x.shape) 4, 1280, 256 = 0, 1, 2 = 1, 2, 0
-        x = torch.flatten(x, start_dim=2, end_dim=3)
-        print("flatten", x.shape)
-        #x = torch.permute(x, (1, 2, 0))
-        print("permute", x.shape)
-        #x = x.unsqueeze(-1)
-        print("unsqueeze", x.shape)
+
+        # # print("fc", x.shape)
+        # x = torch.flatten(x, start_dim=2, end_dim=3)
+        # print("flatten", x.shape)
+        # x = torch.permute(x, (1, 2, 0))
+        # print("permute", x.shape)
         # x = x.unsqueeze(-1)
-        return x
+        # print("unsqueeze", x.shape)
+
+        output = []
+        output = [o for i, o in enumerate(outs) if i + 2 in self.feature_maps]
+
+        print("bentuk : ", type(output), len(output))
+
+        # return x
+        return output
 
 
 '''

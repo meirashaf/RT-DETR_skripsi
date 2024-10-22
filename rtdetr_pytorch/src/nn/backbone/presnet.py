@@ -223,8 +223,8 @@ class PResNet(nn.Module):
             if idx in self.return_idx:
                 outs.append(x)
 
-        print("res ", self.res_layers)
-        
-        print("final", outs)
-        print("bentuk", outs.shape)
+        # print("res ", self.res_layers)
+
+        # print("final", outs)
+        # print("bentuk", outs.shape)
         return outs
