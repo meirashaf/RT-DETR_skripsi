@@ -33,6 +33,8 @@ MODEL_URLS = {
     0.5:
     "/content/RT-DETR_skripsi/PPLCNet_x0_5_pretrained.pth.tar",
     # "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_5_pretrained.pdparams",
+    0.52:
+    "/content/RT-DETR_skripsi/PPLCNet_x0_5_ssld_pretrained.pth.tar",
     0.75:
     "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_75_pretrained.pdparams",
     1.0:

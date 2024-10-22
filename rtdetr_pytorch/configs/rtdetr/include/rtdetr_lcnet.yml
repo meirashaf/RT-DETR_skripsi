@@ -12,13 +12,13 @@ RTDETR:
   # multi_scale: [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800]
 
 LCNet:
-  scale: 0.25
+  scale: 0.52
   pretrained: true
   return_idx: [1, 2, 3]
 
 HybridEncoder:
-  in_channels: [32, 64, 128] #0.25
-  # in_channels: [64, 128, 256] #0.5
+  # in_channels: [32, 64, 128] #0.25
+  in_channels: [64, 128, 256] #0.5 & 0.52
   # in_channels: [128, 256, 512] # 1.0
   # feat_strides: [1, 2, 3]
   feat_strides: [8, 16, 32]
