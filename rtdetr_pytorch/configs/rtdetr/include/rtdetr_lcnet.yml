@@ -17,7 +17,7 @@ LCNet:
   return_idx: [1, 2, 3]
 
 HybridEncoder:
-  in_channels: [256, 512, 1024] #0.5
+  in_channels: [64, 128, 256] #0.5
   # in_channels: [128, 256, 512] # 1.0
   # feat_strides: [1, 2, 3]
   feat_strides: [8, 16, 32]

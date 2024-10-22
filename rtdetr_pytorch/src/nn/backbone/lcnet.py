@@ -26,7 +26,8 @@ NET_CONFIG = {
 
 MODEL_URLS = {
     0.25:
-    "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_25_pretrained.pdparams",
+    # "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_25_pretrained.pdparams",
+    "/content/RT-DETR_skripsi/PPLCNet_x0_25_pretrained.pth.tar",
     0.35:
     "https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/PPLCNet_x0_35_pretrained.pdparams",
     0.5:
