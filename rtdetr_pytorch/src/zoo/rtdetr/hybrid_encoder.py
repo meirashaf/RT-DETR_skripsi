@@ -289,12 +289,14 @@ class HybridEncoder(nn.Module):
         return torch.concat([out_w.sin(), out_w.cos(), out_h.sin(), out_h.cos()], dim=1)[None, :, :]
 
     def forward(self, feats):
+        '''
         print("~~~~~~~~~~~~~~~~")
         print(len(feats), len(self.in_channels))
         # print(feats)
         print("~~~~~~~~~~~~~~~~")
+        '''
         assert len(feats) == len(self.in_channels)
-        print("sikil", type(feats))
+        # print("sikil", type(feats))
         proj_feats = [self.input_proj[i](feat) for i, feat in enumerate(feats)]
 
         # encoder
