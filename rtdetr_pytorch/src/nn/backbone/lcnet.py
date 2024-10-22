@@ -160,6 +160,7 @@ class LCNet(nn.Module):
         super().__init__()
         self.scale = scale
         self.class_expand = class_expand
+        self.feature_maps = feature_maps
 
         out_channels = []
 
