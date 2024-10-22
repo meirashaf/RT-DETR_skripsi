@@ -273,33 +273,33 @@ class LCNet(nn.Module):
         outs = []
 
         x = self.conv1(x)
-        print("1", x.shape)
+        # print("1", x.shape)
 
         x = self.blocks2(x)
-        print("2", x.shape)
+        # print("2", x.shape)
 
         x = self.blocks3(x)
-        print("3", x.shape)
+        # print("3", x.shape)
         outs.append(x)
 
         x = self.blocks4(x)
-        print("4", x.shape)
+        # print("4", x.shape)
         outs.append(x)
 
         x = self.blocks5(x)
-        print("5", x.shape)
+        # print("5", x.shape)
         outs.append(x)
 
         x = self.blocks6(x)
-        print("6", x.shape)
+        # print("6", x.shape)
         # x = self.avg_pool(x)
         outs.append(x)
 
         x = self.last_conv(x)
-        print("last", x.shape)
+        # print("last", x.shape)
 
         x = self.hardswish(x)
-        print("hard", x.shape)
+        # print("hard", x.shape)
 
         # x = self.dropout(x)
         # print("dropout", x.shape)
@@ -307,7 +307,7 @@ class LCNet(nn.Module):
         # print("flat", x.shape)
         # x = self.fc(x)
 
-        # # print("fc", x.shape)
+        # print("fc", x.shape)
         # x = torch.flatten(x, start_dim=2, end_dim=3)
         # print("flatten", x.shape)
         # x = torch.permute(x, (1, 2, 0))
@@ -318,7 +318,7 @@ class LCNet(nn.Module):
         output = []
         output = [o for i, o in enumerate(outs) if i + 2 in self.feature_maps]
 
-        print("bentuk : ", type(output), len(output))
+        # print("bentuk : ", type(output), len(output))
 
         # return x
         return output
