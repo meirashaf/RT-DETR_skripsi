@@ -161,7 +161,7 @@ class LCNet(nn.Module):
         self.scale = scale
         self.class_expand = class_expand
 
-        out_channels = nn.ModuleList()
+        out_channels = []
 
         self.conv1 = ConvBNLayer(
             num_channels=3,
