@@ -67,12 +67,12 @@ class ConvBNLayer(nn.Module):
     def __init__(self, num_channels, filter_size, num_filters, stride, num_groups=1):
         super().__init__()
 
-        print("ubah2", num_channels,
-              num_filters,
-              filter_size,
-              stride,
-              (filter_size - 1) // 2,
-              num_groups)
+        # print("ubah2", num_channels,
+        #       num_filters,
+        #       filter_size,
+        #       stride,
+        #       (filter_size - 1) // 2,
+        #       num_groups)
         self.conv = nn.Conv2d(
             num_channels,
             num_filters,
@@ -87,11 +87,11 @@ class ConvBNLayer(nn.Module):
 
     def forward(self, x):
         x = self.conv(x)
-        print("conv", x.shape)
+        # print("conv", x.shape)
         x = self.bn(x)
-        print("bn", x.shape)
+        # print("bn", x.shape)
         x = self.hardswish(x)
-        print("hardswish", x.shape)
+        # print("hardswish", x.shape)
         return x
 
 
