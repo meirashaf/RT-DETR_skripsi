@@ -7,8 +7,15 @@ train_dataloader:
   type: DataLoader
   dataset:
     type: CocoDetection
-    img_folder: /content/WIDER_sample/sample_wider_train
-    ann_file: /content/WIDER_sample/sample_annotations/wider_face_train_annot_coco_style.json
+    # sample - colab
+    # img_folder: /content/WIDER_sample/sample_wider_train
+    # ann_file: /content/WIDER_sample/sample_annotations/wider_face_train_annot_coco_style.json
+
+    # full - colab
+    img_folder: /content/WIDER_train
+    ann_file: /content/annotations/wider_face_train_annot_coco_style.json
+
+    # sample - local
     # img_folder: C:\SHAFA\Ngoding\SKRIPSI-ngoding\AAA_DATASET\WIDER\custom\WIDER_sample\sample_wider_train
     # ann_file: C:\SHAFA\Ngoding\SKRIPSI-ngoding\AAA_DATASET\WIDER\custom\WIDER_sample\sample_annotations\wider_face_train_annot_coco_style.json
     transforms:
@@ -23,8 +30,15 @@ val_dataloader:
   type: DataLoader
   dataset:
     type: CocoDetection
-    img_folder: /content/WIDER_sample/sample_wider_val
-    ann_file: /content/WIDER_sample/sample_annotations/wider_face_val_annot_coco_style.json
+    # sample - colab
+    # img_folder: /content/WIDER_sample/sample_wider_val
+    # ann_file: /content/WIDER_sample/sample_annotations/wider_face_val_annot_coco_style.json
+
+    # full - colab
+    img_folder: /content/WIDER_val
+    ann_file: /content/annotations/wider_face_val_annot_coco_style.json
+
+    # sample - local
     # img_folder: C:\SHAFA\Ngoding\SKRIPSI-ngoding\AAA_DATASET\WIDER\custom\WIDER_sample\sample_wider_val
     # ann_file: C:\SHAFA\Ngoding\SKRIPSI-ngoding\AAA_DATASET\WIDER\custom\WIDER_sample\sample_annotations\wider_face_val_annot_coco_style.json
     transforms:
